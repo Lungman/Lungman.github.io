@@ -100,7 +100,8 @@ h3 {
 }
 
 /* A border around an element */
-.thing_row {
+.thing_row p {
+	width: 50%;
 	display: inline-flex;
 	flex-direction: row;
 	align-items: flex-start;
