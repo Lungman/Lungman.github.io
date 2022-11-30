@@ -14,6 +14,13 @@ ul{
 	font-style: bold;
 }
 
+p{
+	font-family: 'Jokerman';
+	font-style: bold, italic;
+	color:navy;
+	text-shadow: 5px 5px lightblue;
+	background: cyan;
+}
 
 body {
 	padding-left: 250px;
