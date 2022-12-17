@@ -28,7 +28,7 @@
   <p>Multiply two numbers</p>
   <input type="number" id="InputNumber" min="1" max="100" value="1"><br>
   <label id="OutputNumber"></label><br>
-  <input type="Button" value="Calculate" onClick="runTheSums(document.getElementById('InputNumber').value, 5)">
+  <input type="Button" value="Calculate" onClick="document.getElementById('OutputNumber').innerText=runTheSums(document.getElementById('InputNumber').value, 5)">
 </div>
 </body>
 </html>
