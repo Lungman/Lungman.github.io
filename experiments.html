@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script type="text/javascript" src="tests/Alert.js"></script>
+  <script type="text/javascript" src="tests/mathy.js"></script>
   <title>Behold, my stuff</title>
 </head>
 <body>
@@ -22,6 +23,12 @@
 <div class=".thing_row">
   <p>Hey, click the button below to invoke a JS function</p>
   <input type="button" onclick="alarmo()" value ="button">
+</div>
+<div class="thing_row">
+  <p>Multiply two numbers</p>
+  <input type="number" id="InputNumber" min="1" max="100" value="1"><br>
+  <label id="OutputNumber"></label><br>
+  <input type="Button" value="Calculate" onClick="runTheSums(document.getElementById('InputNumber').value, 5)">
 </div>
 </body>
 </html>
