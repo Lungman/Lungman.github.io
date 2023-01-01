@@ -9,5 +9,5 @@ function reynolds (speed, dia) {
 function haaland (absoluteRoughness, speed, dia){
     let reynoldNum = reynolds(speed, dia/1000);
     console.log(reynoldNum);
-    return ((-1.8*Math.log((absoluteRoughness/(3.7*dia)**1.11)+(6.9/reynoldNum)))**-2);
+    return ((-1.8*Math.log10((absoluteRoughness/(3.7*dia)**1.11)+(6.9/reynoldNum)))**-2);
 }
