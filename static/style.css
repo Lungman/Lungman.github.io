@@ -54,14 +54,15 @@ h3 {
 	padding-left: 25;
 }
 
-label, label_answer {
+label, .label_answer {
 	background-color: white;
 	border-style: solid;
 	border-width: 1px;
 }
 
-label_answer {
+.label_answer {
 	background-color:palegoldenrod;
+	margin-left:25px;
 }
 
 

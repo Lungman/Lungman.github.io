@@ -28,7 +28,7 @@
   <p>Multiply two numbers</p> <br>
   <input type="number" id="InputNumber2" min="1" max="100" value="1">
   <input type="number" id="InputNumber1" min="1" max="100" value="1"><br>
-  <label_answer id="OutputNumber"></label_answer><br>
+  <label id="OutputNumber" class="label_answer">0</label><br>
   <input type="Button" value="Calculate" onClick="document.getElementById('OutputNumber').innerText=runTheSums(document.getElementById('InputNumber1').value, document.getElementById('InputNumber2').value)">
 </div>
 <div class="thing_row">
@@ -36,7 +36,7 @@
   <label>Velocity (m/s)</label><input type="number" id="speed" value="1"><br>
   <label>Diameter (mm)</label><input type="number" id="dia" value="150"><br>
   <label>Absolute Roughness (mm)</label><input type="number" id="absoluteRoughness" value="0.015"><br>
-  <label>Darcy friction factor:</label><label_answer id="frictionAnswer"></label_answer><br>
+  <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
   <input type="Button" value="Calculate" onClick="document.getElementById('frictionAnswer').innerText=haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value)">
 </div>
 </body>
