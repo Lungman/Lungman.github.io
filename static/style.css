@@ -58,13 +58,18 @@ label, .label_answer {
 	background-color: white;
 	border-style: solid;
 	border-width: 1px;
+	margin-left:25px;
+	padding:2px;
 }
 
 .label_answer {
 	background-color:palegoldenrod;
-	margin-left:25px;
+	/*	margin-left:25px;	*/
 }
 
+input {
+	margin-left:25px;
+}
 
 .site-header {
 	padding-left: 4.2rem;

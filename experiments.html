@@ -10,6 +10,13 @@
   <script type="text/javascript" src="tests/Alert.js"></script>
   <script type="text/javascript" src="tests/mathy.js"></script>
   <title>Behold, my stuff</title>
+  <script type="text/javascript">
+    function updateValues() {
+      document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
+      document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
+
+    }
+  </script>
 </head>
 <body>
 <ul>
@@ -33,11 +40,23 @@
 </div>
 <div class="thing_row">
   <p>Get a friction factor (Haaland)</p> <br>
+  <div>
   <label>Velocity (m/s)</label><input type="number" id="speed" value="1"><br>
+</div>
+<div>
   <label>Diameter (mm)</label><input type="number" id="dia" value="150"><br>
+</div>
+<div>
   <label>Absolute Roughness (mm)</label><input type="number" id="absoluteRoughness" value="0.015"><br>
-  <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
-  <input type="Button" value="Calculate" onClick="document.getElementById('frictionAnswer').innerText=haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value)">
+</div>
+<div>
+  <label>Reynolds Number:</label><label id="reynoldsNum" class="label_answer">0000</label>
+</div>
+  <div>
+<label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
+</div>
+  <input type="Button" value="Calculate" onClick=updateValues()>
+
 </div>
 </body>
 </html>
