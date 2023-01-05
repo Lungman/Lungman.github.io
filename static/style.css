@@ -14,7 +14,7 @@ ul{
 	font-style: bold;
 }
 
-p{
+p, summary {
 	font-family: 'Jokerman';
 	font-style: bold, italic;
 	color:navy;

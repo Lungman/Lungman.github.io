@@ -28,18 +28,23 @@
   <a href="tests">Experimentos</a>
 </div>
 <div class="thing_row">
-  <p>Hey, click the button below to invoke a JS function</p><br>
+  <details>
+    <summary>Invoke an alert</summary>
   <input type="button" onclick="alarmo()" value ="button">
+</details>
 </div>
 <div class="thing_row">
-  <p>Multiply two numbers</p> <br>
+  <details>
+  <summary>Multiply two numbers</summary>
   <input type="number" id="InputNumber2" min="1" max="100" value="1">
   <input type="number" id="InputNumber1" min="1" max="100" value="1"><br>
   <label id="OutputNumber" class="label_answer">0</label><br>
   <input type="Button" value="Calculate" onClick="document.getElementById('OutputNumber').innerText=runTheSums(document.getElementById('InputNumber1').value, document.getElementById('InputNumber2').value)">
+</details>
 </div>
 <div class="thing_row">
-  <p>Get a friction factor (Haaland)</p> <br>
+  <details>
+  <summary>Get a friction factor (Haaland)</summary>
   <div>
   <label>Velocity (m/s)</label><input type="number" id="speed" value="1"><br>
 </div>
@@ -56,7 +61,7 @@
 <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
 </div>
   <input type="Button" value="Calculate" onClick=updateValues()>
-
+</details>
 </div>
 </body>
 </html>
