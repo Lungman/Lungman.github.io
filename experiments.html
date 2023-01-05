@@ -63,5 +63,21 @@
   <input type="Button" value="Calculate" onClick=updateValues()>
 </details>
 </div>
+<div class="thing_row">
+  <details>
+    <summary>Embedding</summary>
+  <iframe type="text/html" src="tests/Pipes/PipeCalc.html"  style="overflow: hidden;
+  width: 100%; " onload=console.log(whew);></iframe>
+</details>
+</div>
+<script>
+  // Selecting the iframe element
+  var iframe = document.getElementById("myIframe");
+  
+  // Adjusting the iframe height onload event
+  iframe.onload = function(){
+      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
 </body>
 </html>

@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="static/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <title>Behold, my stuff</title>
-</head>
 <body>
-<ul>
-<header>Welcome to the website of Tomorrow!</header>
-</ul>
-<div class="sidenav">
-  <a href="/">Home</a>
-  <a href="about">About</a>
-  <a href="experiments">Experimentos</a>
-</div>
-      <h3>PIPE CALCULATIONS!</h3>
+  <p> hey what up it's pipe </p>
+  <canvas id="canvas" width="200" height="200" style="border:1px solid #000000;">
+    This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+<script>
+  var c = document.getElementById("canvas");
+  var ctx = c.getContext("2d");
+  ctx.moveTo(0,0);
+  ctx.lineTo(200,100);
+  ctx.stroke();
+  </script>
    </body>
 </html>
