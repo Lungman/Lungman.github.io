@@ -66,18 +66,26 @@
 <div class="thing_row">
   <details>
     <summary>Embedding</summary>
-  <iframe type="text/html" src="tests/Pipes/PipeCalc.html"  style="overflow: hidden;
-  width: 100%; " onload=console.log(whew);></iframe>
+    <h3> hey what up it's pipe </h3>
+    <canvas id="canvas" width="200" height="200" style="border:1px solid #000000;">
+      This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
+  <script>
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var startY = c.height;
+    ctx.moveTo(0,startY*2/3);
+    for (let i=0;i<c.width;i++) {
+      ctx.lineTo (i,startY-(i**2)/100);
+      
+    }
+    ctx.stroke();
+    ctx.moveTo(0,startY*.9);
+    ctx.lineTo(c.width,startY*.9);
+    ctx.stroke();
+    </script>
 </details>
 </div>
-<script>
-  // Selecting the iframe element
-  var iframe = document.getElementById("myIframe");
-  
-  // Adjusting the iframe height onload event
-  iframe.onload = function(){
-      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-  }
 </script>
 </body>
 </html>
