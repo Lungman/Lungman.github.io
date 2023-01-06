@@ -64,26 +64,55 @@
 </details>
 </div>
 <div class="thing_row">
-  <details>
-    <summary>Embedding</summary>
+  <details open>
+    <summary>Plotting</summary>
     <h3> hey what up it's pipe </h3>
-    <canvas id="canvas" width="200" height="200" style="border:1px solid #000000;">
+    <canvas id="canvas" style="border:1px solid #000000;">
       This text is displayed if your browser does not support HTML5 Canvas.
   </canvas>
+  <button id="drawButton" onclick="drawFunction1()">draw another line</button>
   <script>
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
-    var startY = c.height;
-    ctx.moveTo(0,startY*2/3);
+    
+
+    var bgImg = new Image();
+    bgImg.src = "./tests/Pipes/Moody.png";
+
+    bgImg.onload=()=>{
+    c.width=bgImg.width/2;
+    c.height=bgImg.height/2;
+    var hRatio = c.width/bgImg.width;
+    var vRatio = c.height/bgImg.height;
+    var ratio = Math.min(hRatio,vRatio);
+    ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
+    
+
+
+    var startY = c.height*.8;
+    ctx.moveTo(0,startY);
     for (let i=0;i<c.width;i++) {
       ctx.lineTo (i,startY-(i**2)/100);
       
     }
+    ctx.strokeStyle='red';
+    ctx.lineWidth = 5;
     ctx.stroke();
-    ctx.moveTo(0,startY*.9);
-    ctx.lineTo(c.width,startY*.9);
+    ctx.moveTo(0,c.height*.895);
+    ctx.lineTo(c.width,c.height*.895);
     ctx.stroke();
+    ctx.moveTo(c.width*0.0658,0);
+    ctx.lineTo(c.width*0.0658,c.height);
+    ctx.stroke();
+  }
+
+function drawFunction1(){
+  ctx.moveTo(0,0);
+  ctx.lineTo(100,100);
+  ctx.stroke();
+}
     </script>
+
 </details>
 </div>
 </script>
