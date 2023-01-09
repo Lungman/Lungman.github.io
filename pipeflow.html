@@ -78,6 +78,7 @@ function drawFunction1(x,y){
     var vRatio = c.height/bgImg.height;
     var ratio = Math.min(hRatio,vRatio);
     var ratio = c.width/bgImg.width;
+    ctx.clearRect(0, 0, c.width, c.height);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
       
       <!-- pixel locations of corners of graph from top left: x0,y0 = (79,665) x_max,y_max = (1077,42) --!>
