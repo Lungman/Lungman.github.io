@@ -58,6 +58,11 @@ $(function(){
     bgImg.src = "./tests/Pipes/Moody.png";
 
     bgImg.onload=()=>{
+    c.width=bgImg.width/2;
+    c.height=bgImg.height/2;
+    var hRatio = c.width/bgImg.width;
+    var vRatio = c.height/bgImg.height;
+    var ratio = Math.min(hRatio,vRatio);
     var ratio = c.width/bgImg.width;
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
       
