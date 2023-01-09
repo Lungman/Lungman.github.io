@@ -15,7 +15,7 @@
     function updateValues() {
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
-      drawFunction1(document.getElementById('reynoldsNum').value,y_max);
+      drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
     }
     
     var [x_0,y_0,x_max,y_max] = [0,0,0,0] 
