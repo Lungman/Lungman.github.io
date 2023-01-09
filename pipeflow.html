@@ -90,7 +90,7 @@ $(function(){
   }
 
 function drawFunction1(x){
-  var x_actual = (((Math.log10(x)-2.5)/8)*(x_max-x_0))+x_0;
+  var x_actual = ((Math.log10(x)-2.5)/8)*(x_max-x_0);
   ctx.moveTo(x_actual,y_0);
   ctx.lineTo(x_actual,y_max);
   ctx.stroke();
