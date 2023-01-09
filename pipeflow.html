@@ -71,7 +71,7 @@ $(function(){
     x_max = c.width*(1077/bgImg.width);
     y_max = c.height*(42/bgImg.height);
 
-
+<!--
     var startY = c.height*.8;
     ctx.moveTo(0,startY);
     for (let i=0;i<c.width;i++) {
@@ -87,10 +87,11 @@ $(function(){
     ctx.moveTo(x_0,y_0);
     ctx.lineTo(x_0,y_max);
     ctx.stroke();
+      -->
   }
 
 function drawFunction1(x){
-  var x_actual = (((Math.log10(x)-2.5)/5.5)*(x_max-x_0))+x_0;
+  var x_actual = (((Math.log10(x-500))/5.5)*(x_max-x_0))+x_0;
   ctx.moveTo(x_actual,y_0);
   ctx.lineTo(x_actual,y_max);
   ctx.stroke();
