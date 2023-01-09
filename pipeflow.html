@@ -40,7 +40,7 @@ $(function(){
   <label>Reynolds Number:</label><label id="reynoldsNum" class="label_answer">0000</label>
   <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
   <input type="Button" value="Calculate" onClick=updateValues()>
-  </div>
+  </div> <br>
   
     <canvas id="canvas" style="border:1px solid #000000;">
       This text is displayed if your browser does not support HTML5 Canvas.
@@ -61,7 +61,10 @@ $(function(){
     var vRatio = c.height/bgImg.height;
     var ratio = Math.min(hRatio,vRatio);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
-    
+    var x_0 = c.width*0.0658;
+    var y_0 = c.height*0.895;
+    var x_max = c.width*(bgImg.width/1077);
+    var y_max = c.height*(bgImg.height/42);
 
 
     var startY = c.height*.8;
@@ -73,11 +76,11 @@ $(function(){
     ctx.strokeStyle='red';
     ctx.lineWidth = 5;
     ctx.stroke();
-    ctx.moveTo(0,c.height*.895);
-    ctx.lineTo(c.width,c.height*.895);
+    ctx.moveTo(x_0,y_0);
+    ctx.lineTo(x_max,y_0);
     ctx.stroke();
-    ctx.moveTo(c.width*0.0658,0);
-    ctx.lineTo(c.width*0.0658,c.height);
+    ctx.moveTo(x_0,y_0);
+    ctx.lineTo(x_0,y_max);
     ctx.stroke();
   }
 
