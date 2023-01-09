@@ -15,6 +15,7 @@
     function updateValues() {
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
+      resetCanvas();
       drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
     }
     
@@ -52,11 +53,8 @@ $(function(){
   <script>
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
-    
-
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
-
     bgImg.onload=resetCanvas();
 
 function drawFunction1(x,y){
@@ -69,8 +67,8 @@ function drawFunction1(x,y){
   ctx.stroke();
 }
     
-    function resetCanvas(){
-      c.width=bgImg.width/2;
+function resetCanvas(){
+    c.width=bgImg.width/2;
     c.height=bgImg.height/2;
     var hRatio = c.width/bgImg.width;
     var vRatio = c.height/bgImg.height;
