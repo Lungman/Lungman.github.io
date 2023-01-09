@@ -44,8 +44,9 @@ $(function(){
   
     <canvas id="canvas" style="border:1px solid #000000;">
       This text is displayed if your browser does not support HTML5 Canvas.
-  </canvas>
-  <button id="drawButton" onclick="drawFunction1()">draw another line</button>
+  </canvas> <br>
+  <label>Velocity (m/s)</label><input type="number" id="x_loc" value="1">
+  <button id="drawButton" onclick="drawFunction1(document.getElementById('x_loc').value)">draw a line</button>
   <script>
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
@@ -86,9 +87,10 @@ $(function(){
     ctx.stroke();
   }
 
-function drawFunction1(){
-  ctx.moveTo(0,0);
-  ctx.lineTo(100,100);
+function drawFunction1(x){
+  var x_actual = Math.log10(x/100000000)/(x_max-x_0);
+  ctx.moveTo(x_actual,y_0);
+  ctx.lineTo(x_actual,y_max);
   ctx.stroke();
 }
     </script>
