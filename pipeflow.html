@@ -49,7 +49,7 @@ $(function(){
     var ctx = c.getContext("2d");
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
-    bgImg.onload=resetCanvas();
+    resetCanvas();
 
 function drawFunction1(x,y){
   var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
