@@ -61,10 +61,12 @@ $(function(){
     var vRatio = c.height/bgImg.height;
     var ratio = Math.min(hRatio,vRatio);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
-    var x_0 = c.width*0.0658;
-    var y_0 = c.height*0.895;
-    var x_max = c.width*(bgImg.width/1077);
-    var y_max = c.height*(bgImg.height/42);
+      
+      <!-- pixel locations of corners of graph from top left: x0,y0 = (79,665) x_max,y_max = (1077,42) --!>
+    var x_0 = c.width*(79/bgImg.width);
+    var y_0 = c.height*(665/bgImg.height);
+    var x_max = c.width*(1077/bgImg.width);
+    var y_max = c.height*(42/bgImg.height);
 
 
     var startY = c.height*.8;
