@@ -73,7 +73,7 @@ function drawFunction2(x,y){
     function updateValues() {
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
-      document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value);
+      document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
       resetCanvas();
       drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
       drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
