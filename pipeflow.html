@@ -52,9 +52,8 @@ $(function(){
 
 function drawFunction1(x,y){
   var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
-  ctx.strokeStyle='red';
+  ctx.strokeStyle='green';
   ctx.lineWidth = 3;
-  ctx.stroke();
   ctx.moveTo(x_actual,y_0);
   ctx.lineTo(x_actual,y);
   ctx.stroke();
@@ -62,9 +61,8 @@ function drawFunction1(x,y){
     
 function drawFunction2(x,y){
   var y_actual = (((Math.log10(y)-Math.log10(6))/(Math.log10(100)-Math.log10(6)))*(y_max-y_0))+y_0;
-  ctx.strokeStyle='green';
+  ctx.strokeStyle='red';
   ctx.lineWidth = 3;
-  ctx.stroke();
   ctx.moveTo(x_0,y_actual);
   ctx.lineTo(x,y_actual);
   ctx.stroke();
