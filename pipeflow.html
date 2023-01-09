@@ -62,7 +62,7 @@ function drawFunction1(x,y){
 }
     
 function drawFunction2(x,y){
-  var y_actual = ((Math.log10(y)/Math.log10(0.1))*(y_max-y_0))+y_0;
+  var y_actual = ((Math.log10(y)/Math.log10(100))*(y_max-y_0))+y_0;
   ctx.strokeStyle='red';
   ctx.lineWidth = 5;
   ctx.stroke();
@@ -76,7 +76,7 @@ function drawFunction2(x,y){
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       resetCanvas();
       drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
-      drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML);
+      drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
     }
     
 function resetCanvas(){
