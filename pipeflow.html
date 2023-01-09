@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="tests/Alert.js"></script>
+  <script type="text/javascript" src="tests/mathy.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>Behold, my stuff</title>
+  <script type="text/javascript">
+    function updateValues() {
+      document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
+      document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
+
+    }
+  </script>
+</head>
+<body>
+<ul>
+<header>Welcome to the pipeflow section of the website of Tomorrow!</header>
+</ul>
+    <div id="nav-placeholder"></div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
+  
+  
+     <h3> hey what up it's pipe </h3>
+    <canvas id="canvas" style="border:1px solid #000000;">
+      This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
+  <button id="drawButton" onclick="drawFunction1()">draw another line</button>
+  <script>
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    
+
+    var bgImg = new Image();
+    bgImg.src = "./tests/Pipes/Moody.png";
+
+    bgImg.onload=()=>{
+    c.width=bgImg.width/2;
+    c.height=bgImg.height/2;
+    var hRatio = c.width/bgImg.width;
+    var vRatio = c.height/bgImg.height;
+    var ratio = Math.min(hRatio,vRatio);
+    ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
+    
+
+
+    var startY = c.height*.8;
+    ctx.moveTo(0,startY);
+    for (let i=0;i<c.width;i++) {
+      ctx.lineTo (i,startY-(i**2)/100);
+      
+    }
+    ctx.strokeStyle='red';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+    ctx.moveTo(0,c.height*.895);
+    ctx.lineTo(c.width,c.height*.895);
+    ctx.stroke();
+    ctx.moveTo(c.width*0.0658,0);
+    ctx.lineTo(c.width*0.0658,c.height);
+    ctx.stroke();
+  }
+
+function drawFunction1(){
+  ctx.moveTo(0,0);
+  ctx.lineTo(100,100);
+  ctx.stroke();
+}
+    </script>
+  
+ </body>
+</html>
