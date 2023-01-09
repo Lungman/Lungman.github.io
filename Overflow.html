@@ -9,16 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script type="text/javascript" src="tests/Alert.js"></script>
   <script type="text/javascript" src="tests/mathy.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <title>Behold, my stuff</title>
 </head>
 <body>
     <ul>
         <header>Welcome to the tests of the website of Tomorrow!</header>
         </ul>
-        <div class="sidenav">
-          <a href="/">Home</a>
-          <a href="about">About</a>
-          <a href="experiments">Experimentos</a>
-        </div>
+        <div id="nav-placeholder">
+
+</div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
 
 </body>
