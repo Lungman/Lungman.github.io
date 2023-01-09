@@ -11,14 +11,7 @@
   <script type="text/javascript" src="tests/mathy.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <title>Behold, my stuff</title>
-  <script type="text/javascript">
-    function updateValues() {
-      document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
-      document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
-      resetCanvas();
-      drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
-    }
-    
+  <script type="text/javascript">  
     var [x_0,y_0,x_max,y_max] = [0,0,0,0] 
   </script>
 </head>
@@ -55,7 +48,7 @@ $(function(){
     var ctx = c.getContext("2d");
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
-    bgImg.onload=resetCanvas();
+    resetCanvas();
 
 function drawFunction1(x,y){
   var x_actual = (((Math.log10(x)-Math.log10(500))/(8-Math.log10(500)))*(x_max-x_0))+x_0;
@@ -66,6 +59,13 @@ function drawFunction1(x,y){
   ctx.lineTo(x_actual,y);
   ctx.stroke();
 }
+    
+    function updateValues() {
+      document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
+      document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
+      resetCanvas();
+      drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
+    }
     
 function resetCanvas(){
     c.width=bgImg.width/2;
