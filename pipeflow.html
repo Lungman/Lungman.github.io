@@ -61,11 +61,22 @@ function drawFunction1(x,y){
   ctx.stroke();
 }
     
+function drawFunction2(x,y){
+  var y_actual = ((Math.log10(y)/(Math.log(0.1))*(y_max-y_0))+y_0;
+  ctx.strokeStyle='red';
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.moveTo(x_0,y_actual);
+  ctx.lineTo(x,y_actual);
+  ctx.stroke();
+    }
+    
     function updateValues() {
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       resetCanvas();
       drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
+      drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML);
     }
     
 function resetCanvas(){
