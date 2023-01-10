@@ -14,7 +14,7 @@ ul{
 	font-style: bold;
 }
 
-p {
+p, summary {
 	font-family: 'Jokerman';
 	font-style: bold, italic;
 	color:navy;
@@ -106,7 +106,7 @@ input {
 }
 
 /* The navigation menu links */
-.sidenav a, summary {
+.sidenav a, sidenav_summary {
   font-family: Jokerman, sans-serif;
   padding: 6px 8px 6px 16px;
   font-size: 25px;
