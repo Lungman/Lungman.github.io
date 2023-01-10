@@ -51,22 +51,32 @@ $(function(){
     var ctx = c.getContext("2d");
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
+    
+    function getXPos(x) {
+			var xAxisMin = 500;
+			var xAxisMax = 10**8;
+    return (((Math.log10(x)-Math.log10(xAxisMin))/(Math.log10(xAxisMax)-Math.log10(xAxisMin)))*(x_max-x_0))+x_0;
+    }
+    
+    function getYPos(y) {
+      var yAxisMin = 6;
+			var yAxisMax = 100;
+    return (((Math.log10(y)-Math.log10(yAxisMin))/(Math.log10(yAxisMax)-Math.log10(yAxisMin)))*(y_max-y_0))+y_0;
+    }
 
 function drawFunction1(x,y){
-  var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
   ctx.strokeStyle='green';
   ctx.lineWidth = 3;
-  ctx.moveTo(x_actual,y_0);
-  ctx.lineTo(x_actual,y);
+  ctx.moveTo(x,y_0);
+  ctx.lineTo(x,y);
   ctx.stroke();
 }
     
 function drawFunction2(x,y){
-  var y_actual = (((Math.log10(y)-Math.log10(6))/(Math.log10(100)-Math.log10(6)))*(y_max-y_0))+y_0;
   ctx.strokeStyle='red';
   ctx.lineWidth = 3;
-  ctx.moveTo(x_0,y_actual);
-  ctx.lineTo(x,y_actual);
+  ctx.moveTo(x_0,y);
+  ctx.lineTo(x,y);
   ctx.stroke();
     }
     
@@ -75,8 +85,8 @@ function drawFunction2(x,y){
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
       resetCanvas();
-      drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
-      drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
+      drawFunction1(getXPos(document.getElementById('reynoldsNum').innerHTML),y_max);
+      drawFunction2(getXPos(document.getElementById('reynoldsNum').innerHTML),getYPos(document.getElementById('frictionAnswer').innerHTML*1000));
     }
     
 function resetCanvas(){
