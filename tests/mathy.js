@@ -20,3 +20,6 @@ function flowToSpeed (litreRate, dia) {
 function volCalc (dia, length) {
     return (Math.PI*(dia/2)**2)*length;
 }
+function updateElemHTML (value, destination) {
+    document.getElementById(destination).innerHTML=value;
+}
