@@ -14,3 +14,6 @@ function haaland (absoluteRoughness, speed, dia){
         return 64/reynoldNum;
     }
 }
+function flowToSpeed (litreRate, dia) {
+    return ((litreRate/1000)/(Math.PI*(dia/2)**2));
+}
