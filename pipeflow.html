@@ -52,7 +52,7 @@ $(function(){
     var ctx = c.getContext("2d");
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
-    
+    c.width=1000;
     function getXPos(x) {
 			var xAxisMin = 500;
 			var xAxisMax = 10**8;
@@ -90,11 +90,6 @@ function drawLine(x,y,x_end,y_end){
     }
     
 function resetCanvas(){
-    c.width=bgImg.width/2;
-    c.height=bgImg.height/2;
-    var hRatio = c.width/bgImg.width;
-    var vRatio = c.height/bgImg.height;
-    var ratio = Math.min(hRatio,vRatio);
     var ratio = c.width/bgImg.width;
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
