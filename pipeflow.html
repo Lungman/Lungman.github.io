@@ -36,6 +36,7 @@ $(function(){
   <label>Relative Roughness:</label><label id="RelRough" class="label_answer">0.000</label><br>
   <label>Reynolds Number:</label><label id="reynoldsNum" class="label_answer">0000</label>
   <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
+	  <label>Headloss per metre (m):</label><label id="headlossPerMetre" class="label_answer">0.00000</label><br>
   <input type="Button" value="Calculate" onClick=updateValues()> <input type="Button" value="Clear" onClick=resetCanvas()>
     
   </div> <br>
@@ -74,6 +75,7 @@ function drawLine(x,y,x_end,y_end){
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
+			updateElemHTML((document.getElementById("frictionAnswer").innerHTML*(document.getElementById('speed').value**2)/(2*9.81));
       resetCanvas();
 	ctx.beginPath();
 	ctx.strokeStyle="red";
