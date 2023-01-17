@@ -37,15 +37,13 @@ $(function(){
   <label>Reynolds Number:</label><label id="reynoldsNum" class="label_answer">0000</label>
   <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
 	  <label>Headloss per metre (m):</label><label id="headlossPerMetre" class="label_answer">0.00000</label><br>
-  <input type="Button" value="Calculate" onClick=updateValues()> <input type="Button" value="Clear" onClick=resetCanvas()>
-    
-  </div> <br>
+  <input type="Button" value="Calculate" onClick=updateValues()> <input type="Button" value="Clear" onClick=resetCanvas()><br>
+	  <input type="Button" value="+" onClick="c.width+=100;resetCanvas();"><input type="Button" value="-" onClick="c.width-=100;resetCanvas();">
+  </div>
   
     <canvas id="canvas" style="border:1px solid #000000;">
       This text is displayed if your browser does not support HTML5 Canvas.
-  </canvas> <br>
-	<input type="Button" value="+" onClick="c.width+=100;resetCanvas();"><input type="Button" value="-" onClick="c.width-=100;resetCanvas();">
-  
+  </canvas>
   
   
   <script>
