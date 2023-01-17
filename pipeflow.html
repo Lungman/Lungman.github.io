@@ -91,6 +91,7 @@ function drawLine(x,y,x_end,y_end){
     
 function resetCanvas(){
     var ratio = c.width/bgImg.width;
+	c.height=bgImg.height*ratio;
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
       
