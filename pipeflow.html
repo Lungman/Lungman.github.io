@@ -75,7 +75,7 @@ function drawLine(x,y,x_end,y_end){
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
-			updateElemHTML((document.getElementById("frictionAnswer").innerHTML*(document.getElementById('speed').value**2)/(2*9.81)),"headlossPerMetre");
+			updateElemHTML((document.getElementById("frictionAnswer").innerHTML*(document.getElementById('speed').value**2)/(2*9.81*(document.getElementById('dia').value/1000))),"headlossPerMetre");
       resetCanvas();
 	ctx.beginPath();
 	ctx.strokeStyle="red";
