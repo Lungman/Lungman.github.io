@@ -76,6 +76,13 @@ function drawLine(x,y,x_end,y_end){
       document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
 			updateElemHTML((document.getElementById("frictionAnswer").innerHTML*(document.getElementById('speed').value**2)/(2*9.81*(document.getElementById('dia').value/1000))),"headlossPerMetre");
       resetCanvas();
+	    ctx.beginPath();
+	    ctx.strokeStyle="yellow";
+	    ctx.moveTo(getXPos(2500),getYPos(haaland2({Re:2500,relRough:document.getElementById('RelRough').innerHTML})*1000));
+	    for (let i=32; i<81; i++){
+		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('RelRough').innerHTML})*1000));
+	    }
+	  ctx.stroke();
 	ctx.beginPath();
 	ctx.strokeStyle="red";
 	ctx.lineWidth = 3;
@@ -86,13 +93,6 @@ function drawLine(x,y,x_end,y_end){
 	ctx.lineWidth = 3;
       drawLine(x_0,getYPos(document.getElementById('frictionAnswer').innerHTML*1000),getXPos(document.getElementById('reynoldsNum').innerHTML),getYPos(document.getElementById('frictionAnswer').innerHTML*1000));
 	    ctx.stroke();
-	    ctx.strokeStyle="yellow";
-	    ctx.beginPath();
-	    ctx.moveTo(getXPos(2500),getYPos(haaland2({Re:2500,relRough:document.getElementById('RelRough').innerHTML})*1000));
-	    for (let i=34; i<80; i++){
-		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('RelRough').innerHTML})*1000));
-	    }
-	  ctx.stroke();
     }
     
 function resetCanvas(){
