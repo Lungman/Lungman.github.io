@@ -90,7 +90,7 @@ function drawLine(x,y,x_end,y_end){
 	    ctx.beginPath();
 	    ctx.moveTo(getXPos(2500),getYPos(haaland2({Re:2500,relRough:document.getElementById('absoluteRoughness').value})));
 	    for (let i=34; i<100; i++){
-		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), document.getElementById('absoluteRoughness').value})));
+		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('absoluteRoughness').value})));
 	    }
 	  ctx.stroke();
     }
