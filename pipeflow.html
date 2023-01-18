@@ -80,7 +80,7 @@ function drawLine(x,y,x_end,y_end){
 	    ctx.strokeStyle="yellow";
 	    ctx.lineWidth = 3;
 	    ctx.moveTo(getXPos(2000),getYPos(haaland2({Re:2000,relRough:document.getElementById('RelRough').innerHTML})*1000));
-	    for (let i=33; i<81; i++){
+	    for (let i=34; i<81; i++){
 		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('RelRough').innerHTML})*1000));
 	    }
 	  ctx.stroke();
