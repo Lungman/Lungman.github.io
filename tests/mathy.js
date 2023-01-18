@@ -14,6 +14,13 @@ function haaland (absoluteRoughness, speed, dia) {
         return 64/reynoldNum;
     }
 }
+function haaland2 (foo){
+    if (foo.Re<2500){
+        return 64/foo.Re;
+    } else {
+        return ((-1.8*Math.log10((foo.RelRough/3.7)**1.11)+(6.9/foo.Re)))**-2);
+    }
+}
 function flowToSpeed (litreRate, dia) {
     return ((litreRate/1000)/(Math.PI*(dia/2)**2));
 }
