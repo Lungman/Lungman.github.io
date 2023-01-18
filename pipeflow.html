@@ -88,9 +88,9 @@ function drawLine(x,y,x_end,y_end){
 	    ctx.stroke();
 	    ctx.strokeStyle="yellow";
 	    ctx.beginPath();
-	    ctx.moveTo(getXPos(2500),getYPos(haaland2({Re:2500,relRough:document.getElementById('absoluteRoughness').value})*1000));
-	    for (let i=34; i<100; i++){
-		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('absoluteRoughness').value})*1000));
+	    ctx.moveTo(getXPos(2500),getYPos(haaland2({Re:2500,relRough:document.getElementById('RelRough').value})*1000));
+	    for (let i=34; i<80; i++){
+		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('RelRough').value})*1000));
 	    }
 	  ctx.stroke();
     }
