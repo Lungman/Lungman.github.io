@@ -8,11 +8,7 @@ function reynolds (speed, dia) {
 }
 function haaland (absoluteRoughness, speed, dia) {
     let reynoldNum = reynolds(speed, dia/1000);
-    if (reynoldNum >= 2000) {
-    return ((-1.8*Math.log10((absoluteRoughness/(3.7*dia)**1.11)+(6.9/reynoldNum)))**-2);
-    } else {
-        return 64/reynoldNum;
-    }
+    return haaland2 ({Re:reynoldNum, relRough:(absoluteRoughness/dia)});
 }
 function haaland2 (foo){
     if (foo.Re<2000){
