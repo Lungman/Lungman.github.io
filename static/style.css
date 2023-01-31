@@ -113,6 +113,9 @@ input {
   color: #818181;
 	background-color: #111;
 }
+.sidenav a {
+	display:block;
+}
 
 /* A border around an element */
 .thing_row p {
