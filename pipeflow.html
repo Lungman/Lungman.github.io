@@ -30,11 +30,11 @@ $(function(){
 		<summary>Volume calculation</summary>
 		<label>Flowrate (L/s)</label><input type="number" id="litresSec" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('litresSec').value/1000)><br>
 		<label>Flowrate (m³/s)</label><input type="number" id="cubesSec" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('cubesSec').value)><br>
-		<label>Flowrate (m³/hr)</label><input type="number" id="cubesHour" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('cubesHour').value*3600)><br>
+		<label>Flowrate (m³/hr)</label><input type="number" id="cubesHour" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('cubesHour').value*3600)><br><br>
 	</details>
 	<script>
 		function volumeCalcs(volume) {
-		let area=(Math.Pi*(document.getElementById('dia').value/1000)**2)/4;
+		let area=(Math.PI*(document.getElementById('dia').value/1000)**2)/4;
 			document.getElementById('speed').value=volume/area;
 			updateValues();
 		}
