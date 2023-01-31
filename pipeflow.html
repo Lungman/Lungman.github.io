@@ -34,7 +34,7 @@ $(function(){
 	</details>
 	<script>
 		function volumeCalcs(volume) {
-		let area=(Math.Pi()*(document.getElementById('dia').value/1000)**2)/4;
+		let area=(Math.Pi*(document.getElementById('dia').value/1000)**2)/4;
 			document.getElementById('speed').value=volume/area;
 			updateValues();
 		}
