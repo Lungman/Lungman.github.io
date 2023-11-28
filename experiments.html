@@ -110,6 +110,21 @@ function drawFunction1(){
 }
     </script>
 </details>
+  
+<details>
+      <summary>Radio Buttons</summary>
+
+<input type="radio" id="html" name="fav_language" value="HTML" checked>
+<label for="html">HTML</label><br>
+<input type="radio" id="css" name="fav_language" value="CSS">
+<label for="css">CSS</label><br>
+<input type="radio" id="javascript" name="fav_language" value="JavaScript">
+<label for="javascript">JavaScript</label><br>
+
+<label>Selected Button:</label><label id="selectedRadio" class="label_answer"></label>
+<input type="submit" value="Check checked" onclick=document.getElementById("selectedRadio").innerHTML=(document.querySelector('input[name="fav_language"]:checked').value);>
+</details>
+  
     <!-- IN PROGRESS
     <details>
       <summary>Pipe Volume</summary>
