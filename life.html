@@ -36,30 +36,39 @@ $(function(){
   </canvas> <br>
   
   <script>
+    
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
+    var lifeArray = [];
+    var xCount;
+    var yCount;
+
+    document.getElementById('canvas').addEventListener('click', evt => {
+      var x=Math.floor((evt.clientX-document.getElementById('canvas').offsetLeft)*xCount/canvas.width)
+      var y=Math.floor((evt.clientY-document.getElementById('canvas').offsetTop)*yCount/canvas.height)
+      lifeArray[x][y]=!lifeArray[x][y];
+      redrawCanvas()
+    })
 
     function resetCanvas(){
 
       //Maybe move this line elsewhere when this is better
       c.height=c.width;
 
-      var xCount=document.getElementById('xCount').value;
-      var yCount=document.getElementById('yCount').value;
+      xCount=document.getElementById('xCount').value;
+      yCount=document.getElementById('yCount').value;
 
-//dim an empty 2D array
-
-var lifeArray = new Array(xCount).fill(false);
+      //dim a false 2D array
 
 
-/*
-for (let i = 0; i < rows; i++) {
-    numbers[i] = [];
-    for (let j = 0; j < columns; j++){
-        numbers[i][j] = j + 1 + (i*columns);
-    }
-}
-*/
+
+      for (let i = 0; i < xCount; i++) {
+          lifeArray[i] = [];
+          for (let j = 0; j < yCount; j++){
+              lifeArray[i][j] = true;
+          }
+      }
+
       var rectDimX = c.width/xCount;
       var rectDimY = c.height/yCount;
       ctx.fillStyle="red";
@@ -68,35 +77,19 @@ for (let i = 0; i < rows; i++) {
       ctx.fillRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
       ctx.strokeRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
       } }
-
-      /*
-
-    c.width=bgImg.width/2;
-    c.height=bgImg.height/2;
-    var hRatio = c.width/bgImg.width;
-    var vRatio = c.height/bgImg.height;
-    var ratio = Math.min(hRatio,vRatio);
-    var ratio = c.width/bgImg.width;
-    ctx.clearRect(0, 0, c.width, c.height);
-    ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
-      
-*/
-
-     // <!-- pixel locations of corners of graph from top left: x0,y0 = (79,665) x_max,y_max = (1077,42) -->
-    // x_0 = c.width*(79/bgImg.width);
-    // y_0 = c.height*(665/bgImg.height);
-    // x_max = c.width*(1077/bgImg.width);
-    // y_max = c.height*(42/bgImg.height);
     }
 
-
-function updateValues() {
-  document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
-  document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
-  document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
-  resetCanvas();
-  drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
-  drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
+function redrawCanvas() {
+      var rectDimX = c.width/xCount;
+      var rectDimY = c.height/yCount;
+      for (let i = 0; i<xCount; i++) {
+        for (let j = 0; j<yCount; j++) {
+          if (lifeArray[i][j]){
+            ctx.fillStyle="red";
+          } else {ctx.fillStyle="black";}
+      ctx.fillRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
+      ctx.strokeRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
+      } }
     }
   
 //     
