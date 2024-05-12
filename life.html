@@ -26,8 +26,8 @@ $(function(){
   <div>
   <label>X</label><input type="number" id="xCount" value="10" min="1"><br>
   <label>Y</label><input type="number" id="yCount" value="10" min="1"><br>
- <input type="Button" value="Draw" onClick=updateValues()>
- <input type="Button" value="Clear" onClick=resetCanvas()>
+ <input type="Button" value="Next Step" onClick=tickGame()>
+ <input type="Button" value="Update Grid" onClick=resetCanvas()>
     
   </div> <br>
   
@@ -39,77 +39,89 @@ $(function(){
     
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
-    var lifeArray = [];
+    var lifeArray=[];
     var xCount;
     var yCount;
 
-    document.getElementById('canvas').addEventListener('click', evt => {
-      var x=Math.floor((evt.clientX-document.getElementById('canvas').offsetLeft)*xCount/canvas.width)
-      var y=Math.floor((evt.clientY-document.getElementById('canvas').offsetTop)*yCount/canvas.height)
+    element('canvas').addEventListener('click', evt => {
+      var x=Math.floor((evt.clientX-element('canvas').offsetLeft)*xCount/canvas.width)
+      var y=Math.floor((evt.clientY-element('canvas').offsetTop)*yCount/canvas.height)
       lifeArray[x][y]=!lifeArray[x][y];
       redrawCanvas()
     })
+
+    function tickGame(){
+      var tempLifeArray=[];
+
+      for (let i = 0; i <= xCount; i++) {
+        tempLifeArray[i] = [];
+          for (let j = 0; j <= yCount; j++){
+            tempLifeArray[i][j] = false;
+          }
+      }
+
+      for (let i=0; i<xCount; i++){
+        for (let j=0; j<yCount; j++){
+          console.log("i="+i+", j="+j);
+          tempLifeArray[i][j]=lifeCheck(i,j);
+        }
+      }
+      lifeArray=tempLifeArray;
+      redrawCanvas();
+    }
+
+    function lifeCheck (x,y){
+      var food=0;
+      for (let i=x-1; i<=x+1; i++){
+        for (let j=y-1; j<=y+1; j++){
+          if (i>=0 && i<=xCount){
+            if (j>=0 && j<=yCount){
+              if(lifeArray[i][j]){
+                food++;
+              }
+            }
+          }
+        }
+      }
+      return (food==3);
+    }
 
     function resetCanvas(){
 
       //Maybe move this line elsewhere when this is better
       c.height=c.width;
 
-      xCount=document.getElementById('xCount').value;
-      yCount=document.getElementById('yCount').value;
+      xCount=element('xCount').value-1;
+      yCount=element('yCount').value-1;
 
-      //dim a false 2D array
-
-
-
-      for (let i = 0; i < xCount; i++) {
+      //dim an all false 2D array
+      for (let i = 0; i <= xCount; i++) {
           lifeArray[i] = [];
-          for (let j = 0; j < yCount; j++){
-              lifeArray[i][j] = true;
+          for (let j = 0; j <= yCount; j++){
+              lifeArray[i][j] = false;
           }
       }
 
-      var rectDimX = c.width/xCount;
-      var rectDimY = c.height/yCount;
-      ctx.fillStyle="red";
-      for (let i = 0; i<xCount; i++) {
-        for (let j = 0; j<yCount; j++) {
-      ctx.fillRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
-      ctx.strokeRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
-      } }
+      redrawCanvas();
     }
 
-function redrawCanvas() {
+    function redrawCanvas() {
       var rectDimX = c.width/xCount;
       var rectDimY = c.height/yCount;
       for (let i = 0; i<xCount; i++) {
         for (let j = 0; j<yCount; j++) {
           if (lifeArray[i][j]){
             ctx.fillStyle="red";
-          } else {ctx.fillStyle="black";}
+          } else {ctx.fillStyle="white";}
+          ctx.strokeStyle="black";
       ctx.fillRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
       ctx.strokeRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
       } }
     }
-  
-//     
-// function drawFunction1(x,y){
-//   var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
-//   ctx.strokeStyle='green';
-//   ctx.lineWidth = 3;
-//   ctx.moveTo(x_actual,y_0);
-//   ctx.lineTo(x_actual,y);
-//   ctx.stroke();
-// }
-// //     
-// function drawFunction2(x,y){
-//   var y_actual = (((Math.log10(y)-Math.log10(6))/(Math.log10(100)-Math.log10(6)))*(y_max-y_0))+y_0;
-//   ctx.strokeStyle='red';
-//   ctx.lineWidth = 3;
-//   ctx.moveTo(x_0,y_actual);
-//   ctx.lineTo(x,y_actual);
-//   ctx.stroke();
-//     }
+
+    function element(id){
+return document.getElementById(id);
+    }
     </script>
   
  </body>
