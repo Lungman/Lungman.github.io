@@ -28,13 +28,15 @@ $(function(){
   <label>Y</label><input type="number" id="yCount" value="10" min="1"><br>
  <input type="Button" value="Next Step" onClick=tickGame()>
  <input type="Button" value="Update Grid" onClick=resetCanvas()>
-    
+ <input type="Button" value="Auto Advance" onClick=autoAdvance(250)>
+ <input type="Button" value="Stop Auto Advance" onClick=clearInterval(advanceInterval)>
+     
   </div> <br>
-  
+  <div>
   <canvas id="canvas" style="border:1px solid #000000;">
       This text is displayed if your browser does not support HTML5 Canvas.
   </canvas> <br>
-  
+</div>
   <script>
     
     var c = document.getElementById("canvas");
@@ -50,6 +52,10 @@ $(function(){
       redrawCanvas()
     })
 
+    function autoAdvance(delay){
+      advanceInterval=setInterval(tickGame, delay);
+    }
+
     function tickGame(){
       var tempLifeArray=[];
 
@@ -62,7 +68,6 @@ $(function(){
 
       for (let i=0; i<xCount; i++){
         for (let j=0; j<yCount; j++){
-          console.log("i="+i+", j="+j);
           tempLifeArray[i][j]=lifeCheck(i,j);
         }
       }
@@ -78,7 +83,6 @@ $(function(){
             if (j>=0 && j<=yCount){
               if(i!=x || j!=y){
                 food+=lifeArray[i][j];
-                console.log("i= "+i+", j= "+j);
               }
             }
           }
@@ -93,6 +97,8 @@ $(function(){
     function resetCanvas(){
 
       //Maybe move this line elsewhere when this is better
+      //c.width=c.parentElement.offsetWidth*0.9;
+      c.width=500;
       c.height=c.width;
 
       xCount=element('xCount').value-1;
