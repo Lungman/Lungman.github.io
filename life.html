@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="tests/Alert.js"></script>
+  <script type="text/javascript" src="tests/mathy.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>Behold, my stuff</title>
+</head>
+<body onload="resetCanvas()">
+<ul>
+<header>Welcome to Life!</header>
+</ul>
+    <div id="nav-placeholder"></div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
+
+  <div>
+  <label>X</label><input type="number" id="xCount" value="10" min="1"><br>
+  <label>Y</label><input type="number" id="yCount" value="10" min="1"><br>
+ <input type="Button" value="Draw" onClick=updateValues()>
+ <input type="Button" value="Clear" onClick=resetCanvas()>
+    
+  </div> <br>
+  
+  <canvas id="canvas" style="border:1px solid #000000;">
+      This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas> <br>
+  
+  <script>
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    function resetCanvas(){
+
+      //Maybe move this line elsewhere when this is better
+      c.height=c.width;
+
+      var xCount=document.getElementById('xCount').value;
+      var yCount=document.getElementById('yCount').value;
+
+//dim an empty 2D array
+
+var lifeArray = new Array(xCount).fill(false);
+
+for (let i = 0; i < rows; i++) {
+    numbers[i] = [];
+    for (let j = 0; j < columns; j++){
+        numbers[i][j] = j + 1 + (i*columns);
+    }
+}
+
+      var rectDimX = c.width/xCount;
+      var rectDimY = c.height/yCount;
+      ctx.fillStyle="red";
+      for (let i = 0; i<xCount; i++) {
+        for (let j = 0; j<yCount; j++) {
+      ctx.fillRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
+      ctx.strokeRect(rectDimX*i,rectDimY*j,rectDimX,rectDimY);
+      } }
+
+      /*
+
+    c.width=bgImg.width/2;
+    c.height=bgImg.height/2;
+    var hRatio = c.width/bgImg.width;
+    var vRatio = c.height/bgImg.height;
+    var ratio = Math.min(hRatio,vRatio);
+    var ratio = c.width/bgImg.width;
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
+      
+*/
+
+     // <!-- pixel locations of corners of graph from top left: x0,y0 = (79,665) x_max,y_max = (1077,42) -->
+    // x_0 = c.width*(79/bgImg.width);
+    // y_0 = c.height*(665/bgImg.height);
+    // x_max = c.width*(1077/bgImg.width);
+    // y_max = c.height*(42/bgImg.height);
+    }
+
+
+function updateValues() {
+  document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
+  document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
+  document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
+  resetCanvas();
+  drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
+  drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
+    }
+  
+//     
+// function drawFunction1(x,y){
+//   var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
+//   ctx.strokeStyle='green';
+//   ctx.lineWidth = 3;
+//   ctx.moveTo(x_actual,y_0);
+//   ctx.lineTo(x_actual,y);
+//   ctx.stroke();
+// }
+// //     
+// function drawFunction2(x,y){
+//   var y_actual = (((Math.log10(y)-Math.log10(6))/(Math.log10(100)-Math.log10(6)))*(y_max-y_0))+y_0;
+//   ctx.strokeStyle='red';
+//   ctx.lineWidth = 3;
+//   ctx.moveTo(x_0,y_actual);
+//   ctx.lineTo(x,y_actual);
+//   ctx.stroke();
+//     }
+    </script>
+  
+ </body>
+</html>
