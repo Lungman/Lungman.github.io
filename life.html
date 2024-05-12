@@ -76,14 +76,18 @@ $(function(){
         for (let j=y-1; j<=y+1; j++){
           if (i>=0 && i<=xCount){
             if (j>=0 && j<=yCount){
-              if(lifeArray[i][j]){
-                food++;
+              if(i!=x || j!=y){
+                food+=lifeArray[i][j];
+                console.log("i= "+i+", j= "+j);
               }
             }
           }
         }
       }
-      return (food==3);
+      if (lifeArray[x][y]){
+        return (food==2 || food ==3);
+      } else {return food==3;}
+      return false;
     }
 
     function resetCanvas(){
