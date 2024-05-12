@@ -31,14 +31,11 @@ $(function(){
 });
 </script>
   
-  
-<div class="thing_row">
+<div style="width:50vw;">  
   <details>
     <summary>Invoke an alert</summary>
   <input type="button" onclick="alarmo()" value ="button">
 </details>
-</div>
-<div class="thing_row">
   <details>
   <summary>Multiply two numbers</summary>
   <input type="number" id="InputNumber2" min="1" max="100" value="1">
@@ -46,13 +43,10 @@ $(function(){
   <label id="OutputNumber" class="label_answer">0</label><br>
   <input type="Button" value="Calculate" onClick="document.getElementById('OutputNumber').innerText=runTheSums(document.getElementById('InputNumber1').value, document.getElementById('InputNumber2').value)">
 </details>
-</div>
-<div class="thing_row">
   <details>
   <summary>Get a friction factor (Haaland)</summary>
   <div>
   <label>Velocity (m/s)</label><input type="number" id="speed" value="1"><br>
-</div>
 <div>
   <label>Diameter (mm)</label><input type="number" id="dia" value="150"><br>
 </div>
@@ -67,9 +61,7 @@ $(function(){
 </div>
   <input type="Button" value="Calculate" onClick=updateValues()>
 </details>
-</div>
-<div class="thing_row">
-  <details open>
+  <details>
     <summary>Plotting</summary>
     <h3> hey what up it's pipe </h3>
     <canvas id="canvas" style="border:1px solid #000000;">
@@ -117,9 +109,42 @@ function drawFunction1(){
   ctx.stroke();
 }
     </script>
-
 </details>
+  
+<details>
+      <summary>Radio Buttons</summary>
+
+<input type="radio" id="html" name="fav_language" value="HTML" checked>
+<label for="html">HTML</label><br>
+<input type="radio" id="css" name="fav_language" value="CSS">
+<label for="css">CSS</label><br>
+<input type="radio" id="javascript" name="fav_language" value="JavaScript">
+<label for="javascript">JavaScript</label><br>
+
+<label>Selected Button:</label><label id="selectedRadio" class="label_answer"></label>
+<input type="submit" value="Check checked" onclick=document.getElementById("selectedRadio").innerHTML=(document.querySelector('input[name="fav_language"]:checked').value);>
+</details>
+  
+    <!-- IN PROGRESS
+    <details>
+      <summary>Pipe Volume</summary>
+      <label>Diameter (mm)</label><input type="number" id="diaVol" value="150"><br>
+      <label>Length (m)</label><input type="number" id="lengthVol" value="150"><br>
+      <label>Volume (m³)</label><label id="volVol" class="label_answer">100</label><br>
+      <button id="volCalc" onclick="drawFunction1()">draw another line</button>
+    </details>
+-->
+<details>
+      <summary>Moving Shapes</summary>
+      <canvas id="movingCanvas" style="border:1px solid #000000;">
+      This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
+  <script>
+  var mC = document.getElementById("movingCanvas");
+    var mCtx = mC.getContext("2d");
+  </script>
+</details>    
+    
 </div>
-</script>
 </body>
 </html>

@@ -26,8 +26,23 @@ $(function(){
 });
 </script>
   
-  
-     <h3> hey what up it's pipe </h3>
+  <details id="volumeDetails" onToggle="document.getElementById('speed').disabled=document.getElementById('volumeDetails').open">
+	  <!-- add this to disable velocity inputs https://stackoverflow.com/questions/7363117/detecting-the-opening-or-closing-of-a-details-element -->
+		<summary style="width:50vw">Volume calculation</summary>
+		<label>Flowrate (L/s)</label><input type="number" id="litresSec" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('litresSec').value/1000)><br>
+		<label>Flowrate (m³/s)</label><input type="number" id="cubesSec" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('cubesSec').value)><br>
+		<label>Flowrate (m³/hr)</label><input type="number" id="cubesHour" value="1"><input type="Button" value="Calculate" onClick=volumeCalcs(document.getElementById('cubesHour').value/3600)><br><br>
+	</details>
+	<script>
+		function volumeCalcs(volume) {
+		let area=(Math.PI*(document.getElementById('dia').value/1000)**2)/4;
+			document.getElementById('speed').value=volume/area;
+			document.getElementById('litresSec').value=volume*1000;
+			document.getElementById('cubesSec').value=volume;
+			document.getElementById('cubesHour').value=volume*3600;
+			updateValues();
+		}
+	</script>
   
   <div>
   <label>Velocity (m/s)</label><input type="number" id="speed" value="1"><br>
@@ -36,14 +51,14 @@ $(function(){
   <label>Relative Roughness:</label><label id="RelRough" class="label_answer">0.000</label><br>
   <label>Reynolds Number:</label><label id="reynoldsNum" class="label_answer">0000</label>
   <label>Darcy friction factor:</label><label id="frictionAnswer" class="label_answer">0.00000</label><br>
-  <input type="Button" value="Calculate" onClick=updateValues()> <input type="Button" value="Clear" onClick=resetCanvas()>
-    
-  </div> <br>
+	  <label>Headloss per metre (m):</label><label id="headlossPerMetre" class="label_answer">0.00000</label><br>
+  <input type="Button" value="Calculate" onClick=updateValues()> <input type="Button" value="Clear" onClick=resetCanvas()><br>
+	  <input type="Button" value="+" onClick="c.width+=100;resetCanvas();"><input type="Button" value="-" onClick="c.width-=100;resetCanvas();">
+  </div>
   
-    <canvas id="canvas" style="border:1px solid #000000;">
+    <canvas id="canvas" style="border:1px solid #000000;background:#f0ead6">
       This text is displayed if your browser does not support HTML5 Canvas.
-  </canvas> <br>
-  
+  </canvas>
   
   
   <script>
@@ -51,41 +66,58 @@ $(function(){
     var ctx = c.getContext("2d");
     var bgImg = new Image();
     bgImg.src = "./tests/Pipes/Moody.png";
-
-function drawFunction1(x,y){
-  var x_actual = (((Math.log10(x)-Math.log10(500))/(Math.log10(100000000)-Math.log10(500)))*(x_max-x_0))+x_0;
-  ctx.strokeStyle='green';
-  ctx.lineWidth = 3;
-  ctx.moveTo(x_actual,y_0);
-  ctx.lineTo(x_actual,y);
-  ctx.stroke();
-}
-    
-function drawFunction2(x,y){
-  var y_actual = (((Math.log10(y)-Math.log10(6))/(Math.log10(100)-Math.log10(6)))*(y_max-y_0))+y_0;
-  ctx.strokeStyle='red';
-  ctx.lineWidth = 3;
-  ctx.moveTo(x_0,y_actual);
-  ctx.lineTo(x,y_actual);
-  ctx.stroke();
+    c.width=1000;
+    function getXPos(x) {
+			var xAxisMin = 500;
+			var xAxisMax = 10**8;
+    return (((Math.log10(x)-Math.log10(xAxisMin))/(Math.log10(xAxisMax)-Math.log10(xAxisMin)))*(x_max-x_0))+x_0;
     }
+    
+    function getYPos(y) {
+      var yAxisMin = 6;
+			var yAxisMax = 100;
+    return (((Math.log10(y)-Math.log10(yAxisMin))/(Math.log10(yAxisMax)-Math.log10(yAxisMin)))*(y_max-y_0))+y_0;
+    }
+
+function drawLine(x,y,x_end,y_end){
+  ctx.moveTo(x,y);
+  ctx.lineTo(x_end,y_end);
+}
     
     function updateValues() {
       document.getElementById("reynoldsNum").innerHTML=Math.round(reynolds(document.getElementById('speed').value, document.getElementById('dia').value/1000));
       document.getElementById("frictionAnswer").innerHTML = haaland(document.getElementById('absoluteRoughness').value, document.getElementById('speed').value, document.getElementById('dia').value).toFixed(6);
       document.getElementById("RelRough").innerHTML = (document.getElementById('absoluteRoughness').value/document.getElementById('dia').value).toFixed(6);
+			updateElemHTML((document.getElementById("frictionAnswer").innerHTML*(document.getElementById('speed').value**2)/(2*9.81*(document.getElementById('dia').value/1000))),"headlossPerMetre");
       resetCanvas();
-      drawFunction1(document.getElementById('reynoldsNum').innerHTML,y_max);
-      drawFunction2(x_max,document.getElementById('frictionAnswer').innerHTML*1000);
+	    ctx.beginPath();
+	    ctx.strokeStyle="yellow";
+	    ctx.lineWidth = 3;
+      if (document.getElementById("reynoldsNum").innerHTML<2000){
+        ctx.moveTo(getXPos(650),getYPos(64000/650));
+        ctx.lineTo(getXPos(2000), getYPos(64000/2000));
+        ctx.stroke();
+       } else {
+	    ctx.moveTo(getXPos(2000),getYPos(haaland2({Re:2000,relRough:document.getElementById('RelRough').innerHTML})*1000));
+	    for (let i=34; i<81; i++){
+		    ctx.lineTo(getXPos(10**(i/10)), getYPos(haaland2({Re:10**(i/10), relRough:document.getElementById('RelRough').innerHTML})*1000));
+	    }
+    }
+	  ctx.stroke();
+	ctx.beginPath();
+	ctx.strokeStyle="red";
+      drawLine(getXPos(document.getElementById('reynoldsNum').innerHTML),y_0,getXPos(document.getElementById('reynoldsNum').innerHTML),y_max);
+	    ctx.stroke();
+	    ctx.beginPath();
+	ctx.strokeStyle="green";
+	ctx.lineWidth = 3;
+      drawLine(x_0,getYPos(document.getElementById('frictionAnswer').innerHTML*1000),getXPos(document.getElementById('reynoldsNum').innerHTML),getYPos(document.getElementById('frictionAnswer').innerHTML*1000));
+	    ctx.stroke();
     }
     
 function resetCanvas(){
-    c.width=bgImg.width/2;
-    c.height=bgImg.height/2;
-    var hRatio = c.width/bgImg.width;
-    var vRatio = c.height/bgImg.height;
-    var ratio = Math.min(hRatio,vRatio);
     var ratio = c.width/bgImg.width;
+	c.height=bgImg.height*ratio;
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.drawImage(bgImg,0,0,bgImg.width,bgImg.height,0,0,bgImg.width*ratio,bgImg.height*ratio);
       

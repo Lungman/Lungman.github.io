@@ -111,7 +111,10 @@ input {
   padding: 6px 8px 6px 16px;
   font-size: 25px;
   color: #818181;
-  display: block;
+	background-color: #111;
+}
+.sidenav a {
+	display:block;
 }
 
 /* A border around an element */
