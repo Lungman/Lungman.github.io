@@ -57,10 +57,12 @@ $(function(){
       if (autoAdvancing){
         clearInterval(advanceInterval);
         element("advanceButton").value="Play";
+        
       } Else {
       advanceInterval=setInterval(tickGame, delay);
         element("advanceButton").value="Stop";
       }
+      autoAdvancing=!autoAdvancing;
     }
 
     function tickGame(){
