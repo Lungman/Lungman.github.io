@@ -12,7 +12,7 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <title>Behold, my stuff</title>
 </head>
-<body onload="resetCanvas()">
+<body onload="setAspect()">
 <ul>
 <header>Welcome to Life!</header>
 </ul>
@@ -117,13 +117,13 @@ $(function(){
       c.width=c.parentElement.offsetWidth*0.9;
       c.height=(window.innerHeight-c.offsetTop)*0.9
 
-      xCount=element('xCount').value-1;
-      yCount=element('yCount').value-1;
+      xCount=element('xCount').value;
+      yCount=element('yCount').value;
 
       //dim an all false 2D array
-      for (let i = 0; i <= xCount; i++) {
+      for (let i = 0; i < xCount; i++) {
           lifeArray[i] = [];
-          for (let j = 0; j <= yCount; j++){
+          for (let j = 0; j < yCount; j++){
               lifeArray[i][j] = false;
           }
       }
@@ -147,6 +147,11 @@ $(function(){
 
     function element(id){
 return document.getElementById(id);
+    }
+
+   function setAspect(){
+	  element("xCount").value=Math.ceil(element("yCount").value*(window.innerWidth/window.innerHeight));
+	  resetCanvas();
     }
     </script>
   
