@@ -29,8 +29,7 @@ $(function(){
  <input type="Button" value="Next Step" onClick=tickGame()>
  <input type="Button" value="Update Grid" onClick=resetCanvas()>
  <input type="Button" value="Randomise Grid" onClick=randomGrid()>
- <input type="Button" value="Auto Advance" onClick=autoAdvance(250)>
- <input type="Button" value="Stop Auto Advance" onClick=clearInterval(advanceInterval)>
+ <input type="Button" value="Auto Advance" id="advanceButton" onClick=autoAdvance(250)>
      
   </div> <br>
   <div>
@@ -45,6 +44,7 @@ $(function(){
     var lifeArray=[];
     var xCount;
     var yCount;
+    var autoAdvancing=false;
 
     element('canvas').addEventListener('click', evt => {
       var x=Math.floor((evt.clientX-element('canvas').offsetLeft)*xCount/canvas.width)
@@ -54,7 +54,13 @@ $(function(){
     })
 
     function autoAdvance(delay){
+      if (autoAdvancing){
+        clearInterval(advanceInterval);
+        element("advanceButton").value="Play";
+      } Else {
       advanceInterval=setInterval(tickGame, delay);
+        element("advanceButton").value="Stop";
+      }
     }
 
     function tickGame(){
