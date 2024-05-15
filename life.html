@@ -150,7 +150,7 @@ return document.getElementById(id);
     }
 
    function setAspect(){
-	  element("xCount").value=Math.ceil(element("yCount").value*(window.innerWidth/window.innerHeight));
+	  element("xCount").value=Math.ceil(element("yCount").value*(canvas.width/canvas.height));
 	  resetCanvas();
     }
     </script>
