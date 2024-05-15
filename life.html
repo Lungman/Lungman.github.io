@@ -92,15 +92,13 @@ $(function(){
         for (let j=y-1; j<=y+1; j++){
           if (i>=0 && i<=xCount){
             if (j>=0 && j<=yCount){
-              if(i!=x || j!=y){
                 food+=lifeArray[i][j];
-              }
             }
           }
         }
       }
       if (lifeArray[x][y]){
-        return (food==2 || food ==3);
+        return (food==3 || food ==4);
       } else {return food==3;}
       return false;
     }
