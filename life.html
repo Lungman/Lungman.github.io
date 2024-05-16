@@ -105,10 +105,8 @@ $(function(){
       var food=0;
       for (let i=x-1; i<=x+1; i++){
         for (let j=y-1; j<=y+1; j++){
-          if (i>=0 && i<=xCount){
-            if (j>=0 && j<=yCount){
+          if (i>=0 && i<=xCount && j>=0 && j<=yCount){
                 food+=lifeArray[i][j];
-            }
           }
         }
       }
@@ -122,11 +120,9 @@ $(function(){
 	var food=0;
       for (let i=x-1; i<=x+1; i++){
         for (let j=y-1; j<=y+1; j++){
-          if (i>=0 && i<=xCount){
-            if (j>=0 && j<=yCount){
+          if (i>=0 && i<=xCount && j>=0 && j<=yCount){
                 food+=lifeArray[i][j];
-            }
-          }
+          } else {food+=lifeArray[x][y];}
         }
       }
       if (lifeArray[x][y]){
