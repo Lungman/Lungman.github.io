@@ -30,6 +30,7 @@ $(function(){
  <input type="Button" value="Update Grid" onClick=resetCanvas()>
  <input type="Button" value="Randomise Grid" onClick=randomGrid()>
  <input type="Button" value="Play" id="advanceButton" onClick=autoAdvance(250)>
+<input type="checkbox" id="dayandnight"> <label for="dayandnight">Day and Night Rules</label>	
      
   </div> <br>
   <div>
@@ -77,7 +78,11 @@ $(function(){
 
       for (let i=0; i<xCount; i++){
         for (let j=0; j<yCount; j++){
+		if (element("dayandnight").checked){
+			tempLifeArray[i][j]=lifeCheckDayAndNight(i,j);
+		} else {
           tempLifeArray[i][j]=lifeCheck(i,j);
+		}
         }
       }
       lifeArray=tempLifeArray;
@@ -108,6 +113,23 @@ $(function(){
       if (lifeArray[x][y]){
         return (food==3 || food ==4);
       } else {return food==3;}
+      return false;
+    }
+
+	  function lifeCheckDayAndNight (x,y){
+	var food=0;
+      for (let i=x-1; i<=x+1; i++){
+        for (let j=y-1; j<=y+1; j++){
+          if (i>=0 && i<=xCount){
+            if (j>=0 && j<=yCount){
+                food+=lifeArray[i][j];
+            }
+          }
+        }
+      }
+      if (lifeArray[x][y]){
+        return (food==4 || food ==5 || food >=7);
+      } else {return food==3 || food >=6;}
       return false;
     }
 
