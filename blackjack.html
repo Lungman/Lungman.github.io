@@ -34,14 +34,13 @@ $(function(){
 <input type="Button" value="Random Card" onclick="randomCard()">
 
 <script>
-  setCard("firstCard",14,0)
-  let card1=document.getElementById();
+  setCard("firstCard",13,0)
 
   function setCard(cardId,card,suit)
   {
     let cardElem=document.getElementById(cardId);
-  cardElem.style.backgroundPositionX=(-72*(card-1))+"px";
-  card1.style.backgroundPositionY=(-96*(suit-1))+"px";
+  cardElem.style.backgroundPositionX=(-72*(card))+"px";
+  cardElem.style.backgroundPositionY=(-96*(suit))+"px";
   }
 
   function randomCard(){
