@@ -27,21 +27,27 @@ $(function(){
   Gamble Rumble
 </p>
 
-<canvas id="firstCard" style="border:1px solid #000000;background:#f0ead6; width:72px; height:97px; background-image:url('resources/cardSprites.png');">
+<canvas id="firstCard" style="border:1px solid #000000;background:green; width:72px; height:97px; background-image:url('resources/cardSprites.png');">
       This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 
 <input type="Button" value="Random Card" onclick="randomCard()">
 
 <script>
-  let card1=document.getElementById("firstCard");
-  card1.style.backgroundPositionX=(-72*(2-1))+"px";
-  card1.style.backgroundPositionY=(-96*(3-1))+"px";
+  setCard("firstCard",14,0)
+  let card1=document.getElementById();
+
+  function setCard(cardId,card,suit)
+  {
+    let cardElem=document.getElementById(cardId);
+  cardElem.style.backgroundPositionX=(-72*(card-1))+"px";
+  card1.style.backgroundPositionY=(-96*(suit-1))+"px";
+  }
+
   function randomCard(){
     let suit=Math.floor(Math.random()*4);
     let card=Math.floor(Math.random()*13);
-    card1.style.backgroundPositionX=(-72*card)+"px";
-    card1.style.backgroundPositionY=(-96*suit)+"px";
+    setCard("firstCard",card,suit);
   }
 </script>
 
