@@ -21,13 +21,18 @@
 $(function(){
   $("#nav-placeholder").load("navbar.html");
 });
+
+<!-- Declaring card dimensions -->
+  let cardWidth = 72;
+  let cardHeight = 97;
+  
 </script>
 
 <p>
   Gamble Rumble
 </p>
 
-<canvas id="firstCard" style="border:1px solid #000000;background:green; width:72px; height:97px; background-image:url('resources/cardSprites.png');">
+<canvas id="firstCard" style="border:1px solid #000000;background:green; width:cardWidth+'px'; height:cardHeight+'px'; background-image:url('resources/cardSprites.png');">
       This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 
@@ -39,8 +44,8 @@ $(function(){
   function setCard(cardId,card,suit)
   {
     let cardElem=document.getElementById(cardId);
-  cardElem.style.backgroundPositionX=(-72*(card))+"px";
-  cardElem.style.backgroundPositionY=(-96*(suit))+"px";
+  cardElem.style.backgroundPositionX=(-cardWidth*(card))+"px";
+  cardElem.style.backgroundPositionY=(-cardHeight*(suit))+"px";
   }
 
   function randomCard(){
