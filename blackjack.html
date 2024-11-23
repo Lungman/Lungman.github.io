@@ -7,12 +7,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="tests/Alert.js"></script>
-  <script type="text/javascript" src="tests/mathy.js"></script>
+  <script type="text/javascript" src="tests/cardMagic.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <title>Behold, my stuff</title>
 </head>
-<body onload="setAspect()">
+<body>
 <ul>
 <header>Welcome to The Casino!</header>
 </ul>
@@ -21,45 +20,67 @@
 $(function(){
   $("#nav-placeholder").load("navbar.html");
 });
-
-<!-- Declaring card dimensions -->
-  let cardWidth = 72;
-  let cardHeight = 96;
-  
 </script>
 
 <p>
   Gamble Rumble
 </p>
 
-<canvas id="firstCard" style="border:1px solid #000000;background:green; background-image:url('resources/cardSprites.png');">
-      This text is displayed if your browser does not support HTML5 Canvas.
-</canvas>
+<div id="player0"></div>
+<div id="player1"></div>
 
-<input type="Button" value="Random Card" onclick="randomCard()">
+<input type="Button" value="Random Cards" onclick="randomCards()">
+<input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
+<input type="Button" value="Deal Player 2 a Card" onclick="newCard(1)">
 
 <script>
-  setCardDims("firstCard",cardWidth,cardHeight);
-  setCard("firstCard",13,0)
+  //Declaring global variables
 
-  function setCardDims(cardId,width,height)
-    {
-      document.getElementById(cardId).width=width+1;
-      document.getElementById(cardId).height=height+1;
-    }
+  // Declaring card dimensions
+  let cardWidth = 72;
+  let cardHeight = 96;
+
+  // Declaring hand counters
+  let handCount=[0,0];
   
-  function setCard(cardId,card,suit)
+
+  //Deal player 1 and 2 a card to start
+  newCard(0);
+  newCard(1);
+  
+  function setCard(card)
   {
-    let cardElem=document.getElementById(cardId);
-  cardElem.style.backgroundPositionX=(-cardWidth*(card))+"px";
-  cardElem.style.backgroundPositionY=(-cardHeight*(suit))+"px";
+    let cardElem=document.getElementById(card.id);
+  cardElem.style.backgroundPositionX=(-cardWidth*(card.rank))+"px";
+  cardElem.style.backgroundPositionY=(-cardHeight*(card.suit))+"px";
   }
 
-  function randomCard(){
-    let suit=Math.floor(Math.random()*4);
-    let card=Math.floor(Math.random()*13);
-    setCard("firstCard",card,suit);
+  function randomCards(){
+    //handCount.length returns number of players
+    for (let i=0; i<handCount.length; i++){
+      //handCount[i] returns how many cards that player has
+      for (let j=0; j<handCount[i]; j++){ 
+        let suit=Math.floor(Math.random()*4);
+        let rank=Math.floor(Math.random()*13);
+        setCard({id:"player"+i+"card"+j,rank:rank,suit:suit});
+      }
+    }
   }
+
+  function newCard(i){
+
+    var newCardCanvas = document.createElement("canvas");
+    newCardCanvas.id="player"+i+"card"+handCount[i];
+    newCardCanvas.width=cardWidth+1;
+    newCardCanvas.height=cardHeight+1;
+    newCardCanvas.style="border:1px solid #000000;background:green; background-image:url('resources/cardSprites.png');";
+
+    const currPlayer = document.getElementById("player"+i);
+    document.body.insertBefore(newCardCanvas, currPlayer);
+    setCard({id:newCardCanvas.id,rank:13,suit:0});
+    handCount[i]++;
+  }
+
 </script>
 
  </body>
