@@ -26,15 +26,27 @@ $(function(){
   Gamble Rumble
 </p>
 
-<div id="player0"></div>
-<div id="player1"></div>
+<div id="gameControls" style="right:0; position:fixed">
 
-<input type="Button" value="Random Cards" onclick="randomCards()">
-<input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
-<input type="Button" value="Deal Player 2 a Card" onclick="newCard(1)">
+</div>
+
+<div id="player0">
+    <input type="Button" value="Shuffle" onclick="setUp(1)"> 
+    <input type="Button" value="Next Hand" onclick="clearCards()">
+    <input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
+    <label id="player0Score">0</label>
+</div>
+<div id="player1">
+  <input type="Button" value="Deal Player 2 a Card" onclick="newCard(1)">
+  <label id="player1Score">0</label>
+</div>
+<div id="playerCards"></div>
 
 <script>
   //Declaring global variables
+
+  let hands=[];
+  let cards=[];
 
   // Declaring card dimensions
   let cardWidth = 72;
@@ -42,11 +54,20 @@ $(function(){
 
   // Declaring hand counters
   let handCount=[0,0];
-  
 
-  //Deal player 1 and 2 a card to start
-  newCard(0);
-  newCard(1);
+  function setUp(noDecks){
+    cards=shuffle(initDeck(1));
+    clearCards();
+  }
+  function clearCards(){
+    for (let i=0; i<hands.length; i++){
+        for (let j=0; j<hands[i].length; j++){
+          document.getElementById("player"+i+"card"+j).remove();
+        } 
+        document.getElementById("player"+i+"Score").innerHTML=0;
+      }
+      hands=[];
+  }
   
   function setCard(card)
   {
@@ -55,6 +76,7 @@ $(function(){
   cardElem.style.backgroundPositionY=(-cardHeight*(card.suit))+"px";
   }
 
+//test function - remove once stable
   function randomCards(){
     //handCount.length returns number of players
     for (let i=0; i<handCount.length; i++){
@@ -69,17 +91,51 @@ $(function(){
 
   function newCard(i){
 
+    //check if player is initialised, give an empty hand if not
+    if (!hands[i]){
+      hands[i]=[];
+    }
+
+    //check if there's still cards in the deck
+    if (cards.length==0){
+      console.log("Empty Deck");
+      return 0;
+    }
+
+    hands[i].push(cards.pop());
+    let currCard=hands[i].length-1;
+
     var newCardCanvas = document.createElement("canvas");
-    newCardCanvas.id="player"+i+"card"+handCount[i];
+    newCardCanvas.id="player"+i+"card"+currCard;
     newCardCanvas.width=cardWidth+1;
     newCardCanvas.height=cardHeight+1;
     newCardCanvas.style="border:1px solid #000000;background:green; background-image:url('resources/cardSprites.png');";
-
     const currPlayer = document.getElementById("player"+i);
     document.body.insertBefore(newCardCanvas, currPlayer);
-    setCard({id:newCardCanvas.id,rank:13,suit:0});
-    handCount[i]++;
+
+    setCard({id:newCardCanvas.id,rank:hands[i][currCard].rankNo,suit:hands[i][currCard].suitNo});
+    document.getElementById("player"+i+"Score").innerHTML=getValue(i);
   }
+
+  function getValue(player){
+    let value=0;
+    for (let i=0; i<hands[player].length; i++){
+      value+=hands[player][i].value;
+    }
+
+    if (value>21){
+      for (let i=0; i<hands[player].length; i++){
+        if ((value>21)&&(hands[player][i].value==11)){
+          hands[player][i].value=1;
+          value=getValue(player);
+        }
+      }
+    }
+
+    return value;
+  }
+
+
 
 </script>
 
