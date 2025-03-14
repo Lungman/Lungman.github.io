@@ -26,13 +26,15 @@ $(function(){
   Gamble Rumble
 </p>
 
-<div id="gameControls" style="right:0; position:fixed">
-
+<div id="gameControls">
+    <label for="deckCount">Number of Decks</label>
+    <input id="deckCount" type="Number" min=1 value=1>
+    <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
+    <input type="Button" value="Next Hand" onclick="clearCards()">
 </div>
 
 <div id="player0">
-    <input type="Button" value="Shuffle" onclick="setUp(1)"> 
-    <input type="Button" value="Next Hand" onclick="clearCards()">
+
     <input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
     <label id="player0Score">0</label>
 </div>
@@ -56,7 +58,7 @@ $(function(){
   let handCount=[0,0];
 
   function setUp(noDecks){
-    cards=shuffle(initDeck(1));
+    cards=shuffle(initDeck(noDecks));
     clearCards();
   }
   function clearCards(){
