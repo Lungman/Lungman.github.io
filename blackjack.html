@@ -28,15 +28,15 @@ $(function(){
 
 <div id="gameControls">
     <label for="deckCount">Number of Decks</label>
-    <input id="deckCount" type="Number" min=1 value=1>
-    <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
-    <input type="Button" value="Next Hand" onclick="clearCards()">
+    <input id="deckCount" type="Number" min=1 value=1> <br>
 	<label for="playerCount">Number of Players</label>
-    <input id="playerCount" type="Number" min=1 value=1>
+    <input id="playerCount" type="Number" min=1 value=1> <br>
+    <input type="Button" value="Next Hand" onclick="setUpPlayers(document.getElementById('playerCount').value)">
+    <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
+	
 </div>
-
+<div id="players">
 <div id="player0">
-
     <input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
     <label id="player0Score">0</label><br>
 </div>
@@ -44,6 +44,8 @@ $(function(){
   <input type="Button" value="Deal Player 2 a Card" onclick="newCard(1)">
   <label id="player1Score">0</label><br>
 </div>
+</div>
+
 <div id="playerCards"></div>
 
 <script>
@@ -51,6 +53,7 @@ $(function(){
 
   let hands=[];
   let cards=[];
+  let playerCount=0;
 
   // Declaring card dimensions
   let cardWidth = 72;
@@ -61,8 +64,34 @@ $(function(){
 
   function setUp(noDecks){
     cards=shuffle(initDeck(noDecks));
-    clearCards();
+    setUpPlayers(document.getElementById('playerCount').value);
   }
+  
+  function setUpPlayers(noPlayers){
+	document.getElementById("players").innerHTML="";
+	for (let i=0; i<noPlayers; i++){
+		var newPlayerDiv = document.createElement("div");
+		newPlayerDiv.id="player"+i;
+		document.getElementById("players").appendChild(newPlayerDiv);
+		
+		var newPlayerHitButton = document.createElement("input");
+		newPlayerHitButton.type="Button";
+		newPlayerHitButton.value="Deal Player "+(i+1)+" a Card";
+		newPlayerHitButton.id="player"+i+"Hit";
+		newPlayerHitButton.setAttribute("onClick","newCard("+i+")");
+		newPlayerDiv.appendChild(newPlayerHitButton);
+		
+		var newPlayerScoreLabel = document.createElement("label");
+		newPlayerScoreLabel.id = "player"+i+"Score";
+		newPlayerScoreLabel.innerHTML = 0;
+		newPlayerDiv.appendChild(newPlayerScoreLabel);
+		
+		newPlayerDiv.appendChild(document.createElement("br"));
+	}
+	hands=[];
+  }
+  
+  /*
   function clearCards(){
     for (let i=0; i<hands.length; i++){
         for (let j=0; j<hands[i].length; j++){
@@ -72,6 +101,7 @@ $(function(){
       }
       hands=[];
   }
+  */
   
   function setCard(card)
   {
@@ -80,7 +110,7 @@ $(function(){
   cardElem.style.backgroundPositionY=(-cardHeight*(card.suit))+"px";
   }
 
-//test function - remove once stable
+//test function - not used in game
   function randomCards(){
     //handCount.length returns number of players
     for (let i=0; i<handCount.length; i++){
