@@ -30,7 +30,7 @@ $(function(){
     <label for="deckCount">Number of Decks</label>
     <input id="deckCount" type="Number" min=1 value=1> <br>
 	<label for="playerCount">Number of Players</label>
-    <input id="playerCount" type="Number" min=1 value=1> <br>
+    <input id="playerCount" type="Number" min=1 value=2> <br>
     <input type="Button" value="Next Hand" onclick="setUpPlayers(document.getElementById('playerCount').value)">
     <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
 	
@@ -61,6 +61,8 @@ $(function(){
 
   // Declaring hand counters
   let handCount=[0,0];
+
+  setUp(1);
 
   function setUp(noDecks){
     cards=shuffle(initDeck(noDecks));
