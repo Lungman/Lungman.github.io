@@ -31,16 +31,18 @@ $(function(){
     <input id="deckCount" type="Number" min=1 value=1>
     <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
     <input type="Button" value="Next Hand" onclick="clearCards()">
+	<label for="playerCount">Number of Players</label>
+    <input id="playerCount" type="Number" min=1 value=1>
 </div>
 
 <div id="player0">
 
     <input type="Button" value="Deal Player 1 a Card" onclick="newCard(0)">
-    <label id="player0Score">0</label>
+    <label id="player0Score">0</label><br>
 </div>
 <div id="player1">
   <input type="Button" value="Deal Player 2 a Card" onclick="newCard(1)">
-  <label id="player1Score">0</label>
+  <label id="player1Score">0</label><br>
 </div>
 <div id="playerCards"></div>
 
@@ -113,7 +115,8 @@ $(function(){
     newCardCanvas.height=cardHeight+1;
     newCardCanvas.style="border:1px solid #000000;background:green; background-image:url('resources/cardSprites.png');";
     const currPlayer = document.getElementById("player"+i);
-    document.body.insertBefore(newCardCanvas, currPlayer);
+    currPlayer.appendChild(newCardCanvas);
+	
 
     setCard({id:newCardCanvas.id,rank:hands[i][currCard].rankNo,suit:hands[i][currCard].suitNo});
     document.getElementById("player"+i+"Score").innerHTML=getValue(i);
