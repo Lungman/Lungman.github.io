@@ -70,7 +70,11 @@ $(function(){
   }
   
   function setUpPlayers(noPlayers){
+	  //Delete all content within the "Players" div
 	document.getElementById("players").innerHTML="";
+	hands=[];
+
+	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards.
 	for (let i=0; i<noPlayers; i++){
 		var newPlayerDiv = document.createElement("div");
 		newPlayerDiv.id="player"+i;
@@ -94,7 +98,6 @@ $(function(){
 		newCard(i);
 		}
 	}
-	hands=[];
   }
   
   /*
