@@ -67,7 +67,7 @@ $(function(){
 
   function setUp(noDecks){
     shoe=shuffle(initDeck(noDecks));
-    setUpPlayers(document.getElementById('playerCount').value);
+    setUpPlayers(parseInt(document.getElementById('playerCount').value)+1);
   }
   
   function setUpPlayers(noPlayers){
