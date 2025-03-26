@@ -52,7 +52,7 @@ $(function(){
   //Declaring global variables
 
   let hands=[];
-  let cards=[];
+  let shoe=[];
   let playerCount=0;
 
   // Declaring card dimensions
@@ -62,31 +62,33 @@ $(function(){
   // Declaring hand counters
   let handCount=[0,0];
 
-  setUp(1);
+  setUp(document.getElementById('deckCount').value);
 
   function setUp(noDecks){
-    cards=shuffle(initDeck(noDecks));
+    shoe=shuffle(initDeck(noDecks));
     setUpPlayers(document.getElementById('playerCount').value);
   }
   
   function setUpPlayers(noPlayers){
 	  //Delete all content within the "Players" div
+	  noPlayers++;
 	document.getElementById("players").innerHTML="";
-	hands=[];
+	hands=[0];
 
-	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards.
+	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards. Dealer is Player 0.
 	for (let i=0; i<noPlayers; i++){
 		var newPlayerDiv = document.createElement("div");
 		newPlayerDiv.id="player"+i;
 		document.getElementById("players").appendChild(newPlayerDiv);
 		
+		if(i!=0){
 		var newPlayerHitButton = document.createElement("input");
 		newPlayerHitButton.type="Button";
-		newPlayerHitButton.value="Deal Player "+(i+1)+" a Card";
+		newPlayerHitButton.value="Deal Player "+(i)+" a Card";
 		newPlayerHitButton.id="player"+i+"Hit";
 		newPlayerHitButton.setAttribute("onClick","newCard("+i+")");
 		newPlayerDiv.appendChild(newPlayerHitButton);
-		
+		}
 		var newPlayerScoreLabel = document.createElement("label");
 		newPlayerScoreLabel.id = "player"+i+"Score";
 		newPlayerScoreLabel.innerHTML = 0;
@@ -112,11 +114,10 @@ $(function(){
   }
   */
   
-  function setCard(card)
-  {
+  function setCard(card) {
     let cardElem=document.getElementById(card.id);
-  cardElem.style.backgroundPositionX=(-cardWidth*(card.rank))+"px";
-  cardElem.style.backgroundPositionY=(-cardHeight*(card.suit))+"px";
+	cardElem.style.backgroundPositionX=(-cardWidth*(card.rank))+"px";
+	cardElem.style.backgroundPositionY=(-cardHeight*(card.suit))+"px";
   }
 
 //test function - not used in game
@@ -139,14 +140,14 @@ $(function(){
       hands[i]=[];
     }
 
-    //check if there's still cards in the deck
-    if (cards.length==0){
+    //check if there's still cards in the shoe
+    if (shoe.length==0){
       console.log("Empty Deck");
       window.alert("Empty Deck");
       return 0;
     }
 
-    hands[i].push(cards.pop());
+    hands[i].push(shoe.pop());
     let currCard=hands[i].length-1;
 
     var newCardCanvas = document.createElement("canvas");
@@ -157,9 +158,12 @@ $(function(){
     const currPlayer = document.getElementById("player"+i);
     currPlayer.appendChild(newCardCanvas);
 	
-
+	if (i==0 && currCard==1){
+	hiddenCard({id:newCardCanvas.id,rank:hands[i][currCard].rankNo,suit:hands[i][currCard].suitNo});
+	} else {	
     setCard({id:newCardCanvas.id,rank:hands[i][currCard].rankNo,suit:hands[i][currCard].suitNo});
     document.getElementById("player"+i+"Score").innerHTML=getValue(i);
+	}
   }
 
   function getValue(player){
@@ -176,10 +180,19 @@ $(function(){
         }
       }
     }
-
-    return value;
-  }
-
+	return value;
+	}
+	
+	function hiddenCard(card){
+		let cardElem=document.getElementById(card.id);
+		cardElem.style.backgroundPositionX=(-cardWidth*(13))+"px";
+		cardElem.style.backgroundPositionY=(-cardHeight*(0))+"px";
+	}
+	
+	function dealersTurn() {
+	setCard({id:"player0card1",rank:hands[0][1].rankNo,suit:hands[0][1].suitNo});
+	document.getElementById("player0Score").innerHTML=getValue(0);
+	}
 
 
 </script>
