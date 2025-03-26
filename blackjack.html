@@ -31,7 +31,7 @@ $(function(){
     <input id="deckCount" type="Number" min=1 value=1> <br>
 	<label for="playerCount">Number of Players</label>
     <input id="playerCount" type="Number" min=1 value=2> <br>
-    <input type="Button" value="Next Hand" onclick="setUpPlayers(document.getElementById('playerCount').value)">
+    <input type="Button" value="Next Hand" onclick="setUpPlayers(document.getElementById('playerCount').value+1)">
     <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
     <input type="Button" value="Dealers Turn" onclick="dealersTurn()"> 
 	
@@ -72,12 +72,12 @@ $(function(){
   
   function setUpPlayers(noPlayers){
 	  //Delete all content within the "Players" div
-	  noPlayers++;
+	  playerCount = noPlayers;
 	document.getElementById("players").innerHTML="";
 	hands=[0];
 
 	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards. Dealer is Player 0.
-	for (let i=0; i<noPlayers; i++){
+	for (let i=0; i<playerCount; i++){
 		var newPlayerDiv = document.createElement("div");
 		newPlayerDiv.id="player"+i;
 		document.getElementById("players").appendChild(newPlayerDiv);
@@ -165,6 +165,11 @@ $(function(){
     setCard({id:newCardCanvas.id,rank:hands[i][currCard].rankNo,suit:hands[i][currCard].suitNo});
     document.getElementById("player"+i+"Score").innerHTML=getValue(i);
 	}
+	
+	if (getValue(i)>21) {
+	document.getElementById("player"+i+"Hit").disabled=true;
+	}
+	
   }
 
   function getValue(player){
@@ -191,8 +196,18 @@ $(function(){
 	}
 	
 	function dealersTurn() {
+	
+	for (let i=1; i<playerCount; i++){
+	document.getElementById("player"+i+"Hit").disabled=true;
+	}
+	
 	setCard({id:"player0card1",rank:hands[0][1].rankNo,suit:hands[0][1].suitNo});
 	document.getElementById("player0Score").innerHTML=getValue(0);
+	
+	while (getValue(0)<16) {
+	newCard(0);
+	}
+	
 	}
 
 
