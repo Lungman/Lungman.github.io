@@ -26,3 +26,10 @@ function volCalc (dia, length) {
 function updateElemHTML (value, destination) {
     document.getElementById(destination).innerHTML=value;
 }
+function fang (foo){
+    if (foo.Re<2000){
+        return 64/foo.Re;
+    } else {
+        return 1.613*(Math.log((0.234*foo.relRough**1.1007-(60.525/foo.Re**1.1105)+(56.291/foo.Re**1.0712))))**-2;
+    }
+}
