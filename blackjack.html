@@ -85,11 +85,20 @@ $(function(){
 		if(i!=0){
 		var newPlayerHitButton = document.createElement("input");
 		newPlayerHitButton.type="Button";
-		newPlayerHitButton.value="Deal Player "+(i)+" a Card";
+		newPlayerHitButton.value="Hit";
 		newPlayerHitButton.id="player"+i+"Hit";
 		newPlayerHitButton.setAttribute("onClick","newCard("+i+")");
 		newPlayerDiv.appendChild(newPlayerHitButton);
+		
+		var newPlayerStickButton = document.createElement("input");
+		newPlayerStickButton.type="Button";
+		newPlayerStickButton.value="Stick";
+		newPlayerStickButton.id="player"+i+"Stick";
+		newPlayerStickButton.setAttribute("onClick","stick("+i+")");
+		newPlayerDiv.appendChild(newPlayerStickButton);
 		}
+		
+		
 		var newPlayerScoreLabel = document.createElement("label");
 		newPlayerScoreLabel.id = "player"+i+"Score";
 		newPlayerScoreLabel.innerHTML = 0;
@@ -167,9 +176,14 @@ $(function(){
 	}
 	
 	if (getValue(i)>21) {
-	document.getElementById("player"+i+"Hit").disabled=true;
+	stick(i);
 	}
 	
+  }
+  
+  function stick(player){
+  document.getElementById("player"+player+"Hit").disabled=true;
+  document.getElementById("player"+player+"Stick").disabled=true;
   }
 
   function getValue(player){
