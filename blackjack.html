@@ -81,30 +81,21 @@ $(function(){
 		var newPlayerDiv = document.createElement("div");
 		newPlayerDiv.id="player"+i;
 		document.getElementById("players").appendChild(newPlayerDiv);
-		
-		if(i!=0){
-		var newPlayerHitButton = document.createElement("input");
-		newPlayerHitButton.type="Button";
-		newPlayerHitButton.value="Hit";
-		newPlayerHitButton.id="player"+i+"Hit";
-		newPlayerHitButton.setAttribute("onClick","newCard("+i+")");
-		newPlayerDiv.appendChild(newPlayerHitButton);
-		
-		var newPlayerStickButton = document.createElement("input");
-		newPlayerStickButton.type="Button";
-		newPlayerStickButton.value="Stick";
-		newPlayerStickButton.id="player"+i+"Stick";
-		newPlayerStickButton.setAttribute("onClick","stick("+i+")");
-		newPlayerDiv.appendChild(newPlayerStickButton);
-		}
-		
+
+		var newPlayerControls = document.createElement("div");
+		newPlayerControls.id="player"+i+"Controls";
+		document.getElementById("player"+i).appendChild(newPlayerControls);
 		
 		var newPlayerScoreLabel = document.createElement("label");
 		newPlayerScoreLabel.id = "player"+i+"Score";
 		newPlayerScoreLabel.innerHTML = 0;
-		newPlayerDiv.appendChild(newPlayerScoreLabel);
+		newPlayerControls.appendChild(newPlayerScoreLabel);
 		
-		newPlayerDiv.appendChild(document.createElement("br"));
+		if(i==1){
+		makeButtons(i);
+		}
+		
+		//newPlayerDiv.appendChild(document.createElement("br"));
 				
 		for (let j=0; j<2; j++){
 		newCard(i);
@@ -176,14 +167,9 @@ $(function(){
 	}
 	
 	if (getValue(i)>21) {
-	stick(i);
+	nextPlayer();
 	}
 	
-  }
-  
-  function stick(player){
-  document.getElementById("player"+player+"Hit").disabled=true;
-  document.getElementById("player"+player+"Stick").disabled=true;
   }
 
   function getValue(player){
@@ -210,11 +196,6 @@ $(function(){
 	}
 	
 	function dealersTurn() {
-	
-	for (let i=1; i<playerCount; i++){
-	document.getElementById("player"+i+"Hit").disabled=true;
-	}
-	
 	setCard({id:"player0card1",rank:hands[0][1].rankNo,suit:hands[0][1].suitNo});
 	document.getElementById("player0Score").innerHTML=getValue(0);
 	
@@ -224,6 +205,39 @@ $(function(){
 	
 	}
 
+	function nextPlayer() {
+		currPlayer=document.getElementById("playerHitButton").player;
+		document.getElementById("playerHitButton").remove();
+		document.getElementById("playerStickButton").remove();
+		
+		if (currPlayer<(playerCount-1)){
+		makeButtons(currPlayer+1);
+		}
+		else {
+		dealersTurn();
+		}
+	}
+	
+	function makeButtons(currPlayer) {
+	
+		playerDiv=document.getElementById("player"+currPlayer+"Controls");
+	
+		var newPlayerHitButton = document.createElement("input");
+		newPlayerHitButton.type="Button";
+		newPlayerHitButton.value="Hit";
+		newPlayerHitButton.id="playerHitButton";
+		newPlayerHitButton.player=currPlayer;
+		newPlayerHitButton.setAttribute("onClick","newCard("+currPlayer+")");
+		playerDiv.appendChild(newPlayerHitButton);
+		
+		var newPlayerStickButton = document.createElement("input");
+		newPlayerStickButton.type="Button";
+		newPlayerStickButton.value="Stick";
+		newPlayerStickButton.id="playerStickButton";
+		newPlayerStickButton.player=currPlayer;
+		newPlayerStickButton.setAttribute("onClick","nextPlayer()");
+		playerDiv.appendChild(newPlayerStickButton);
+	}
 
 </script>
 
