@@ -77,7 +77,7 @@ $(function(){
 	hands=[0];
 	
 	if (shoe.length < (document.getElementById('shoePercent').value)/100*document.getElementById('deckCount').value*52) {
-		setUp(document.getElementById('deckCount').value);
+		shoe=shuffle(initDeck(document.getElementById('deckCount').value));
 	}
 
 	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards. Dealer is Player 0.
