@@ -28,13 +28,12 @@ $(function(){
 
 <div id="gameControls">
     <label for="deckCount">Number of Decks</label>
-    <input id="deckCount" type="Number" min=1 value=4> <br>
+    <input id="deckCount" type="Number" min=1 value=1> <br>
 	<label for="playerCount">Number of Players</label>
-    <input id="playerCount" type="Number" min=1 value=3> <br>
-	<label>Cards Left in Shoe</label><label id=shoeCount>0</label><br>
-	<label>Shoe reshuffles when at % Remaining</label><input id=shoePercent type="Number" min=15 max=75 value=25><br>
+    <input id="playerCount" type="Number" min=1 value=2> <br>
     <input type="Button" value="Next Hand" onclick="setUpPlayers(parseInt(document.getElementById('playerCount').value)+1)">
     <input type="Button" value="Shuffle" onclick="setUp(document.getElementById('deckCount').value)"> 
+    <input type="Button" value="Dealers Turn" onclick="dealersTurn()"> 
 	
 </div>
 <div id="players">
@@ -78,7 +77,7 @@ $(function(){
 	hands=[0];
 	
 	if (shoe.length < (document.getElementById('shoePercent').value)/100*document.getElementById('deckCount').value*52) {
-	setUp(document.getElementById('deckCount').value);
+		setUp(document.getElementById('deckCount').value);
 	}
 
 	  //Loop through the number of players, add divs for each player and populate with buttons, then deal two cards. Dealer is Player 0.
@@ -154,7 +153,6 @@ $(function(){
     }
 
     hands[i].push(shoe.pop());
-	document.getElementById("shoeCount").innerHTML=shoe.length;
     let currCard=hands[i].length-1;
 
     var newCardCanvas = document.createElement("canvas");
@@ -173,9 +171,6 @@ $(function(){
 	}
 	
 	if (getValue(i)>21) {
-
-		//NEED TO ADD IN CODE TO HANDLE THE DEALER GOING BUST
-		
 	nextPlayer();
 	}
 	
